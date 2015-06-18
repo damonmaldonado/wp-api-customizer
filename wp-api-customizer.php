@@ -151,6 +151,8 @@ class WP_API_Customizer {
 				$custom_meta_data = do_shortcode( get_post_meta( $post['ID'], $custom_field_name, true ) );
 				$data['post_meta'][ $attribute ] = $custom_meta_data;
 			}
+		//test unsetting
+		  unset( $data['author'] );
 
 		}
 
