@@ -5,7 +5,7 @@ Plugin URI:  https://github.com/ixkaito/wp-api-customizer
 Author:      Kite
 Author URI:  http://kiteretz.com
 Version:     0.0.2
-Description: Make post meta data (custom field values) available for JSON REST API (WP API) when unauthenticated.
+Description: Make post meta data (custom field values) available for JSON REST API (WP API) when unauthenticated. - modified by dmm to include do_shortcode
 Text Domain: wp-api-customizer
 Domain Path: /languages
 License:     GPLv2
@@ -148,7 +148,8 @@ class WP_API_Customizer {
 			foreach ( $options as $key => $option ) {
 				$attribute         = $option['json-attribute'];
 				$custom_field_name = $option['custom-field-name'];
-				$data['post_meta'][ $attribute ] = get_post_meta( $post['ID'], $custom_field_name, true );
+				$custom_meta_data = do_shortcode( get_post_meta( $post['ID'], $custom_field_name, true ) );
+				$data['post_meta'][ $attribute ] = $custom_meta_data;
 			}
 
 		}
