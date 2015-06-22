@@ -158,8 +158,18 @@ class WP_API_Customizer {
 			foreach ( $options as $key => $option ) {
 				$attribute         = $option['json-attribute'];
 				$custom_field_name = $option['custom-field-name'];
+				$process_shortcodes = $option['process-shortcodes'];
+				$multiple_values = $option['allow-multiple'];
+				if ($process_shortcodes === 'yes'){
 				$custom_meta_data = do_shortcode( get_post_meta( $post['ID'], $custom_field_name, true ) );
+			} else if ($multiple_values ==='yes'){
+				$custom_meta_data = get_post_meta( $post['ID'], $custom_field_name, false );
+			} else {
+				$custom_meta_data = get_post_meta( $post['ID'], $custom_field_name, true );
+			}
 				$data['post_meta'][ $attribute ] = $custom_meta_data;
+			}
+			}
 			}
 		//test unsetting
 		  unset( $data['author'] );
