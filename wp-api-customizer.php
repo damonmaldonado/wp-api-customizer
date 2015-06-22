@@ -169,8 +169,8 @@ class WP_API_Customizer {
 			}
 				$data['post_meta'][ $attribute ] = $custom_meta_data;
 			}
-			}
-			}
+			
+			
 		//test unsetting
 		  unset( $data['author'] );
 
@@ -179,6 +179,6 @@ class WP_API_Customizer {
 		return $data;
 	}
 
-}
+
 
 $wp_api_customizer = new WP_API_Customizer();
