@@ -179,6 +179,6 @@ class WP_API_Customizer {
 		return $data;
 	}
 
-
+}
 
 $wp_api_customizer = new WP_API_Customizer();
