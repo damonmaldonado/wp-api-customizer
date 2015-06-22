@@ -148,7 +148,7 @@ class WP_API_Customizer {
 			foreach ( $options as $key => $option ) {
 				$attribute         = $option['json-attribute'];
 				$custom_field_name = $option['custom-field-name'];
-				$custom_meta_data = do_shortcode( get_post_meta( $post['ID'], $custom_field_name, false ) );
+				$custom_meta_data = do_shortcode( get_post_meta( $post['ID'], $custom_field_name, true ) );
 				$data['post_meta'][ $attribute ] = $custom_meta_data;
 			}
 		//test unsetting
