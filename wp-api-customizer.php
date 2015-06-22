@@ -105,6 +105,8 @@ class WP_API_Customizer {
 							<th class="column-remove" id="cb" scope="col"></th>
 							<th scope="col"><?php _e( 'JSON Attribute', $this->domain ); ?></th>
 							<th scope="col"><?php _e( 'Custom Field Name', $this->domain ); ?></th>
+							<th scope="col"><?php _e( 'Decode Shortcodes?', $this->domain ); ?></th>
+							<th scope="col"><?php _e( 'Multiple Values', $this->domain ); ?></th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -112,6 +114,8 @@ class WP_API_Customizer {
 							<th class="column-add" scope="col"><a href="#" class="dashicons-before dashicons-plus add-option"></a></th>
 							<th scope="col"><?php _e( 'JSON Attribute', $this->domain ); ?></th>
 							<th scope="col"><?php _e( 'Custom Field Name', $this->domain ); ?></th>
+							<th scope="col"><?php _e( 'Decode Shortcodes?', $this->domain ); ?></th>
+							<th scope="col"><?php _e( 'Multiple Values', $this->domain ); ?></th>
 						</tr>
 					</tfoot>
 					<tbody id="the-list">
@@ -126,6 +130,12 @@ class WP_API_Customizer {
 									</td>
 									<td>
 										<input type="text" placeholder="" value="<?php echo esc_attr( $option['custom-field-name'] ); ?>" name="<?php echo esc_attr( "$this->options[$key][custom-field-name]" ); ?>" class="text" id="<?php echo esc_attr( "{$this->options}_{$key}_custom-field-name" ); ?>" />
+									</td>
+																		<td>
+										<input type="text" placeholder="" value="<?php echo esc_attr( $option['process-shortcodes'] ); ?>" name="<?php echo esc_attr( "$this->options[$key][process-shortcodes]" ); ?>" class="text" id="<?php echo esc_attr( "{$this->options}_{$key}_process-shortcodes" ); ?>" />
+									</td>
+									<td>
+										<input type="text" placeholder="" value="<?php echo esc_attr( $option['allow-multiple'] ); ?>" name="<?php echo esc_attr( "$this->options[$key][allow-multiple]" ); ?>" class="text" id="<?php echo esc_attr( "{$this->options}_{$key}_allow-multiple" ); ?>" />
 									</td>
 								</tr>
 							<?php endforeach; ?>
