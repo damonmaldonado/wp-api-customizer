@@ -107,6 +107,7 @@ class WP_API_Customizer {
 							<th scope="col"><?php _e( 'Custom Field Name', $this->domain ); ?></th>
 							<th scope="col"><?php _e( 'Decode Shortcodes?', $this->domain ); ?></th>
 							<th scope="col"><?php _e( 'Multiple Values', $this->domain ); ?></th>
+							<th scope="col"><?php _e( 'Extract Images', $this->domain ); ?></th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -116,6 +117,7 @@ class WP_API_Customizer {
 							<th scope="col"><?php _e( 'Custom Field Name', $this->domain ); ?></th>
 							<th scope="col"><?php _e( 'Decode Shortcodes?', $this->domain ); ?></th>
 							<th scope="col"><?php _e( 'Multiple Values', $this->domain ); ?></th>
+							<th scope="col"><?php _e( 'Extract Images', $this->domain ); ?></th>
 						</tr>
 					</tfoot>
 					<tbody id="the-list">
@@ -136,6 +138,9 @@ class WP_API_Customizer {
 									</td>
 									<td>
 										<input type="text" placeholder="" value="<?php echo esc_attr( $option['allow-multiple'] ); ?>" name="<?php echo esc_attr( "$this->options[$key][allow-multiple]" ); ?>" class="text" id="<?php echo esc_attr( "{$this->options}_{$key}_allow-multiple" ); ?>" />
+									</td>
+									<td>
+										<input type="text" placeholder="" value="<?php echo esc_attr( $option['extract-images'] ); ?>" name="<?php echo esc_attr( "$this->options[$key][extract-images]" ); ?>" class="text" id="<?php echo esc_attr( "{$this->options}_{$key}_extract-images" ); ?>" />
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -160,6 +165,7 @@ class WP_API_Customizer {
 				$custom_field_name = $option['custom-field-name'];
 				$process_shortcodes = $option['process-shortcodes'];
 				$multiple_values = $option['allow-multiple'];
+				$extract_images = $option['extract-images'];
 				if ($process_shortcodes === 'yes'){
 				$custom_meta_data = do_shortcode( get_post_meta( $post['ID'], $custom_field_name, true ) );
 			} else if ($multiple_values ==='yes'){
@@ -167,6 +173,20 @@ class WP_API_Customizer {
 			} else {
 				$custom_meta_data = get_post_meta( $post['ID'], $custom_field_name, true );
 			}
+			if ($extract_images === 'yes'){
+				if ($multiple_values ==='yes'){
+					$temp_meta = $custom_meta_data;
+					foreach ($temp_meta as $key => $value) {
+						$temp_image = wp_get_attachment_image_src( $value);
+						$custom_meta_data[]=$temp_image[0];
+					}
+				} else {
+					$temp_image = wp_get_attachment_image_src( $custom_meta_data );
+					$custom_meta_data = $temp_image[0];
+				}
+			}
+
+
 				$data['post_meta'][ $attribute ] = $custom_meta_data;
 			}
 			
