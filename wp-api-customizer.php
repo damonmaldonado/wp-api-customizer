@@ -176,6 +176,7 @@ class WP_API_Customizer {
 			if ($extract_images === 'yes'){
 				if ($multiple_values ==='yes'){
 					$temp_meta = $custom_meta_data;
+					unset($custom_meta_data);
 					foreach ($temp_meta as $key => $value) {
 						$temp_image = wp_get_attachment_image_src( $value, 'full');
 						$custom_meta_data[]=$temp_image[0];
