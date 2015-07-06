@@ -173,13 +173,15 @@ class WP_API_Customizer {
 			} else {
 				$custom_meta_data = get_post_meta( $post['ID'], $custom_field_name, true );
 			}
-			if ($extract_images === 'yes' && is_numeric($custom_meta_data)){
+			if ($extract_images === 'yes' ){
 				if ($multiple_values ==='yes'){
 					$temp_meta = $custom_meta_data;
+					if (is_numeric($custom_meta_data)){
 					unset($custom_meta_data);
 					foreach ($temp_meta as $key => $value) {
 						$temp_image = wp_get_attachment_image_src( $value, 'full');
 						$custom_meta_data[]=$temp_image[0];
+					}
 					}
 				} else {
 					$temp_image = wp_get_attachment_image_src( $custom_meta_data, 'full' );
