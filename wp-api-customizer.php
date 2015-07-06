@@ -173,7 +173,7 @@ class WP_API_Customizer {
 			} else {
 				$custom_meta_data = get_post_meta( $post['ID'], $custom_field_name, true );
 			}
-			if ($extract_images === 'yes' ){
+			if ($extract_images === 'yes'){
 				if ($multiple_values ==='yes'){
 					$temp_meta = $custom_meta_data;
 					unset($custom_meta_data);
